@@ -11,6 +11,7 @@
 - The tool will also work with CPU and GPU driver detection tools to determine if drivers are outdated, missing, or corrupted.
 - Exports the results to JSON/CSV.
 
-## AI Usage Informatin
+## AI Usage Information
 - AI will scan for the current device driver version, scan the internet for the current most up-to-date driver version, compare the two, and inform the user what currently installed drivers are not updated.
 - AI will scan currently installed drivers for any corrupted code and will offer reinstallation solutions to the user to resolve the discovered issues.
+- AI will give a priority numbering to each issue discovered, displaying the highest priority issues at the top and the lowest priority issues at the bottom.
