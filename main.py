@@ -1,20 +1,32 @@
 import os, sys
 
+
+
+def printStatus(data):
+	if isinstance(data, list):
+		data = "\n\n".join(data)
+	printString = ""
+	for line in data.split("\n"):
+		if "problem" in line.lower():
+			line = f"\033[33m{line}\033[0m"
+		if "disabled" in line.lower():
+			line = f"\033[31m{line}\033[0m"
+		printString += line + "\n"
+	print(printString)
+
 lib = None
 if(sys.platform == "linux"):
 	#Linux
 	try:
-		import linux
+		import linux as lib
 		print("\033[32mlinux.py Loaded\033[0m")
-		lib = linux
 	except Exception as e:
 		print(f"\033[31mLinux detected as OS. Unable to load linux.py!!\nError: {e}\033[0m")
 elif(sys.platform == "win32"):
 	#Windows
 	try:
-		import windows
+		import windows as lib
 		print("\033[32mwindows.py Loaded\033[0m")
-		lib = windows
 	except Exception as e:
 		print(f"\033[31mWindows detected as OS. Unable to load windows.py!!\nError: {e}\033[0m")
 elif(sys.platform == "darwin"):
@@ -28,8 +40,15 @@ if lib == None:
 	print("Exiting")
 	exit(0)
 
-print("Getting Drivers...")
+print("Getting Problem Drivers...")
+#Linux on gets drivers
+
 try:
-	print(str(lib.getDrivers().stdout.strip()))
+	drivers = lib.getFaultDrivers()
+	#printStatus(drivers)
+	lib.repairDrivers(drivers)
+
 except Exception as e:
-	print(f"\033[31mUnexpected Error: {e}\033[0m")
+	print(f"\033[31mException Error: {e}\033[0m")
+
+

@@ -1,4 +1,4 @@
 import subprocess
 
-def getDrivers():
-	return subprocess.run("lsmod", capture_output=True, text=True)
+def getFaultDrivers():
+	return subprocess.run(["lsmod", "dmesg | grep -iE 'error|fail|taint'"], capture_output=True, text=True)
