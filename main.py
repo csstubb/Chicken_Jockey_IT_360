@@ -15,21 +15,22 @@ def printStatus(data):
 	print(printString)
 
 lib = None
-if(sys.platform == "linux"):
+platform = sys.platform
+if(platform == "linux"):
 	#Linux
 	try:
 		import linux as lib
 		print("\033[32mlinux.py Loaded\033[0m")
 	except Exception as e:
 		print(f"\033[31mLinux detected as OS. Unable to load linux.py!!\nError: {e}\033[0m")
-elif(sys.platform == "win32"):
+elif(platform == "win32"):
 	#Windows
 	try:
 		import windows as lib
 		print("\033[32mwindows.py Loaded\033[0m")
 	except Exception as e:
 		print(f"\033[31mWindows detected as OS. Unable to load windows.py!!\nError: {e}\033[0m")
-elif(sys.platform == "darwin"):
+elif(platform == "darwin"):
 	#MacOS
 	print("Mac Detected")
 else:
@@ -45,10 +46,8 @@ print("Getting Problem Drivers...")
 
 try:
 	drivers = lib.getFaultDrivers()
-	#printStatus(drivers)
+	if platform != "linux":
+		printStatus(drivers)
 	lib.repairDrivers(drivers)
-
 except Exception as e:
 	print(f"\033[31mException Error: {e}\033[0m")
-
-
