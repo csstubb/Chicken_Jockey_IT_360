@@ -109,11 +109,22 @@ def getFaultDrivers():
     for driver in drivers:
         if len(driver.strip()) == 0:
             continue
+            
+        # Controlled demo test rule
+        if "VGA compatible controller" in driver:
+            problemDrivers.append(driver.split("\n")[0])
+            continue
 
         if shouldIgnoreDevice(driver):
             continue
 
         if "Kernel driver in use" not in driver:
+            problemDrivers.append(driver.split("\n")[0])
+
+        if shouldIgnoreDevice(driver):
+            continue
+
+        if "Kernel driver in use" not in driver or "VGA compatible controller" in driver:
             problemDrivers.append(driver.split("\n")[0])
 
     if problemDrivers:
