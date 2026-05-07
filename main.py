@@ -1,6 +1,15 @@
 import os, sys
 
+def exitStatement(code):
+	color = "\033[0m"
+	if code == 0:
+		color = "\033[32m"
+	print(f"{color}Exiting with code: {code}\033[0m")
+	exit(code)
 
+def getUID():
+	## UID 0 is root
+	return os.getuid()
 
 def printStatus(data):
 	if isinstance(data, list):
@@ -48,6 +57,15 @@ try:
 	drivers = lib.getFaultDrivers()
 	if platform != "linux":
 		printStatus(drivers)
-	lib.repairDrivers(drivers)
+	if len(drivers) > 0:
+		fix = False
+		if getUID() != 0:
+			print("\033[31mNot Running as Root. Please follow one of the solutions below\033[0m")
+			fix = lib.fixPermissions()
+			lib.cl()
+			if isinstance(fix, str):
+				print(fix)
+				exitStatement(0)
+		lib.repairDrivers(drivers, fix)
 except Exception as e:
 	print(f"\033[31mException Error: {e}\033[0m")
