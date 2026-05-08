@@ -63,23 +63,6 @@ cd C:\Users\YOUR_USER\Chicken_Jockey_IT_360
 python main.py
 ```
 
-## Project Structure
-
-```
-driver-forensics/
-├── main.py                  # Entry point
-├── core/
-│   ├── scanner.py           # Collects raw driver metadata from Windows
-│   └── analyzer.py          # Rule-based corruption/tamper detection
-├── ai/
-│   └── ai_agent.py          # AI version checking, corruption scoring, priority ranking
-├── exporters/
-│   └── exporter.py          # JSON and CSV export
-├── logs/                    # Scan outputs saved here (gitignored)
-├── requirements.txt
-└── .gitignore
-```
-
 ## Output
 
 Results are printed to the console ranked by priority and saved to:
