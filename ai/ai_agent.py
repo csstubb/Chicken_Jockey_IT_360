@@ -7,7 +7,7 @@ import urllib.request
 OLLAMA_URL   = "http://localhost:11434/api/generate"
 OLLAMA_MODEL = "tinyllama"   # change to "tinyllama" if RAM is limited
 
-# ── Anthropic (optional, used only if ANTHROPIC_API_KEY is set) ───────────────
+# Anthropic (optional, used only if ANTHROPIC_API_KEY is set)
 ANTHROPIC_URL   = "https://api.anthropic.com/v1/messages"
 ANTHROPIC_MODEL = "claude-sonnet-4-6"
 
@@ -96,7 +96,6 @@ Respond with this exact JSON structure:
 	def _parseJSON(self, text):
 		"""Strip markdown fences and parse JSON from model response."""
 		text = re.sub(r"```json|```", "", text).strip()
-		# Find the first { ... } block in case the model added extra text
 		match = re.search(r"\{.*\}", text, re.DOTALL)
 		if match:
 			return json.loads(match.group())
