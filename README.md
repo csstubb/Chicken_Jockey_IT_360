@@ -84,6 +84,5 @@ driver-forensics/
 
 Results are printed to the console ranked by priority and saved to:
 - `logs/results.json` — full detailed output
-- `logs/results.csv` — summary suitable for importing into forensic tools
+- `logs/results.csv` — summary for importing into forensic tools
 
-MIT
