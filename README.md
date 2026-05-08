@@ -10,6 +10,7 @@
 - The tool will collect driver metadata from Windows-native sources (driver packages, signature status, system logs, etc.). It will then use a rule-based model to identify the drivers that are most likely to be corrupted, or inconsistent with the systems expected status.
 - The tool will also work with CPU and GPU driver detection tools to determine if drivers are outdated, missing, or corrupted.
 - Exports the results to JSON/CSV.
+- The tool will also be able to run on Linux
 
 ## AI Usage Information
 - AI will scan for the current device driver version, scan the internet for the current most up-to-date driver version, compare the two, and inform the user what currently installed drivers are not updated.
@@ -29,8 +30,7 @@
 
 ## Requirements
 
-- Windows 11
-- Linux
+- Windows 11 (or Linux)
 - Python 3.10+
 - Administrator privileges (required for full Event Log and DriverStore access)
 
