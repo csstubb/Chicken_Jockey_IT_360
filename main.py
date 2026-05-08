@@ -29,6 +29,7 @@ if(platform == "linux"):
 	#Linux
 	try:
 		import linux as lib
+		lib.cl()
 		print("\033[32mlinux.py Loaded\033[0m")
 	except Exception as e:
 		print(f"\033[31mLinux detected as OS. Unable to load linux.py!!\nError: {e}\033[0m")
@@ -36,6 +37,7 @@ elif(platform == "win32"):
 	#Windows
 	try:
 		import windows as lib
+		lib.cl()
 		print("\033[32mwindows.py Loaded\033[0m")
 	except Exception as e:
 		print(f"\033[31mWindows detected as OS. Unable to load windows.py!!\nError: {e}\033[0m")
@@ -50,14 +52,20 @@ if lib == None:
 	print("Exiting")
 	exit(0)
 
-print("Getting Problem Drivers...")
-#Linux on gets drivers
-
 try:
+	#fix = False
+	if getUID() != 0:
+		print("\033[31mNot Running as Root. Please follow one of the solutions below\033[0m")
+		#fix = lib.fixPermissions()
+		#lib.cl()
+		#if isinstance(fix, str):
+		#	print(fix)
+		#	exitStatement(0)
+	print("\nGetting Problem Drivers...")
 	drivers = lib.getFaultDrivers()
 	if platform != "linux":
 		printStatus(drivers)
-	if len(drivers) > 0:
+	if len(drivers) > -1: #<----- Change to 0 for push
 		fix = False
 		if getUID() != 0:
 			print("\033[31mNot Running as Root. Please follow one of the solutions below\033[0m")

@@ -18,22 +18,23 @@ def fixPermissions():
 	print(f"""Options to fix permission errors
 1. (\033[32mMost Recomended\033[0m) {optionOne}
 \n2. (\033[33mSecond Best\033[0m) {optionTwo}
-\n3. (\033[31mMost Tedious Method\033[0m) Enter 'p' now to be prompted for password at every sudo call.
-{format("\033[34mNote:\033[0m We ask for your credential at each call so that we don't store sensitive data in this program and increase security.", "\t")}
 """)
+#\n3. (\033[31mMost Tedious Method\033[0m) Enter 'p' now to be prompted for password at every sudo call.
+#{format("\033[34mNote:\033[0m We ask for your credential at each call so that we don't store sensitive data in this program and increase security.", "\t")}
+#""")
 
-	action = str(input("\nOption [1, 2, 3/p]: ")).lower()
-	askOpts = ["3", "p"]
-	if action in askOpts:
-		return True
-	print("Rerun the program once handled!")
-	if action == "1":
-		return optionOne
-	elif action == "2":
-		return optionTwo
-	else:
-		print("Unrecognized input")
-		return False
+	str(input("\nPress Enter")).lower()
+	#askOpts = ["3", "p"]
+	#if action in askOpts:
+	#	return True
+	#print("Rerun the program once handled!")
+	#if action == "1":
+	#	return optionOne
+	#elif action == "2":
+	#	return optionTwo
+	#else:
+	#	print("Unrecognized input")
+	#	return False
 
 def getInstanceID(driver):
 	for block in driver.split(" "):
@@ -54,23 +55,27 @@ def getFaultDrivers():
 	drivers = subprocess.check_output(["lspci", "-nnkq"], text=True).split('\n\n')
 	problemDrivers = []
 	for driver in drivers:
-		if "Kernal driver in use" not in driver and len(driver) > 0:
+		if "Kernel driver in use" not in driver and len(driver) > 0:
 			problemDrivers.append(driver.split('\n')[0])
 
 	if problemDrivers:
 		print("\033[33mPossible Problem Drivers\033[0m")
 		for driver in problemDrivers:
-			print(f"\033[31m[-]\033[0m {driver}")
+			print(f"\t\033[31m[-]\033[0m {driver}")
 	else:
-		print("\033[32mAll detectedPCI drivers are healthy\033[0m")
+		print("\t\033[32mAll detected PCI drivers are healthy\033[0m")
+
 	return problemDrivers
 
 def repairDrivers(drivers, askSudo):
+	print("\033[35mMagic working behind the scenes...one second...\033[0m")
+	subprocess.run(["sudo", "DEBIAN_FRONTEND=noninteractive", "apt-get", "update", "-y"], stdout=subprocess.DEVNULL)
+	subprocess.run(["sudo", "DEBIAN_FRONTEND=noninteractive", "apt-get", "upgrade", "-y"], stdout=subprocess.DEVNULL)
 	if not isinstance(drivers, list):
 		print("\033[31Wrong Data Type for repairDrivers!!\033[0m")
 		return None
 	if len(drivers) == 0:
-		print("No problem drivers. Exiting repairDrivers")
+		print("\033[32mNo problem drivers. Exiting repairDrivers\033[0m")
 		return None
 	driverIDs = []
 	for driver in drivers:
