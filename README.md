@@ -47,7 +47,7 @@ cd Chicken_Jockey_IT_360
 pip install -r requirements.txt
 ```
 
-**3. Install Ollama** (optional but recommended for full AI features)
+**3. Install Ollama** (optional but recommended for full AI features, then run the commands below)
 
 ```powershell
 ollama pull llama3
@@ -85,11 +85,5 @@ driver-forensics/
 Results are printed to the console ranked by priority and saved to:
 - `logs/results.json` — full detailed output
 - `logs/results.csv` — summary suitable for importing into forensic tools
-
-## Security Note
-
-Never commit your `ANTHROPIC_API_KEY` to GitHub. The `.gitignore` is already configured to exclude `.env` files, but always double-check before pushing.
-
-## License
 
 MIT
