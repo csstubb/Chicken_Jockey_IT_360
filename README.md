@@ -38,7 +38,7 @@
 
 **1. Clone the repository**
 ```bash
-git clone https://github.com/YOUR_USER/Chicken_Jockey_IT_360
+git clone https://github.com/csstubb/Chicken_Jockey_IT_360
 cd Chicken_Jockey_IT_360
 ```
 
