@@ -1,0 +1,5 @@
+# Driver Forensics Tool - Dependencies
+# All core functionality uses Python standard library only.
+# The anthropic package is optional — the tool falls back to rule-based scoring without it.
+
+anthropic>=0.25.0
