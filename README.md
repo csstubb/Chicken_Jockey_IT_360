@@ -1,4 +1,3 @@
-# IT_360_Final_Project
 
 ## Team Members
 - Cale Stubblefield
